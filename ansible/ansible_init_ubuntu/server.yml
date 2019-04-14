@@ -1,0 +1,6 @@
+---
+# run locally here, yadda yadda yadda
+- hosts: test
+  connection: ssh
+  roles:
+    - build_ubuntu

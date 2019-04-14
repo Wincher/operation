@@ -1,0 +1,9 @@
+---
+# vars file for build_ubuntu
+
+init_apt_components:
+  - lsb-core
+  - net-tools
+  - vim
+  - gcc
+  - git

@@ -1,0 +1,47 @@
+---
+# tasks file for build_ubuntu
+- name: install lsb-core
+  apt:
+    pkg: lsb-core
+    state: present
+    update_cache: false
+  become: yes
+
+- name: get lsb_release
+  raw: lsb_release -a | awk '{print $2}' | tail -n 1
+  register: codename
+
+- name: show codename
+  debug:
+    msg: "{{ codename }}"
+
+- name: judge is_apt_sources.list.bakexist
+  shell: ls /etc/apt/sources.list.bak
+  ignore_errors: true
+  register: is_apt_sources_list_bak_exist
+
+- name: backup sources.list
+  copy:
+    src: /etc/apt/sources.list
+    dest: /etc/apt/sources.list.bak
+    remote_src: yes
+  become: yes
+  when: is_apt_sources_list_bak_exist is failed
+
+- name: cp sources.list
+  template:
+    src: sources.list.j2
+    dest: /etc/apt/sources.list
+  become: yes
+
+- name: apt update
+  apt: update_cache=yes
+  become: yes
+
+- name: init components
+  apt:
+    pkg: "{{ item }}"
+    state: installed
+    update_cache: false
+  become: yes
+  with_items: "{{ init_apt_components }}"

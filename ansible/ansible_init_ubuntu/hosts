@@ -1,0 +1,2 @@
+[test]  # group name
+192.168.0.102 ansible_become_pass='1'    #remote server address
