@@ -40,8 +40,7 @@
 
 - name: init components
   apt:
-    pkg: "{{ item }}"
-    state: installed
+    pkg: '{{ init_apt_components }}'
+    state: present
     update_cache: false
   become: yes
-  with_items: "{{ init_apt_components }}"
