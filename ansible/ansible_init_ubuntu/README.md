@@ -2,7 +2,7 @@
 
 ## target
 
-install nessary tools, service and other stuff on a ubuntu server
+install nessary tools, service, change apt source and other setup steps on a new ubuntu server
 
 ## preconditions
 

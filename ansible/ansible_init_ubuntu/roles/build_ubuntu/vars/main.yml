@@ -16,3 +16,5 @@ init_apt_components:
   - zlib1g-dev
   #  for shared folder
   - samba
+  # for check tempature
+  - lm-sensors
