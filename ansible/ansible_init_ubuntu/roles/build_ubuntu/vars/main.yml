@@ -18,3 +18,13 @@ init_apt_components:
   - samba
   # for check tempature
   - lm-sensors
+  # for docker see more: https://docs.docker.com/engine/install/ubuntu/
+  - apt-transport-https
+  - ca-certificates
+  - gnupg
+  - lsb-release
+
+docker_components:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
