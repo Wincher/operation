@@ -33,11 +33,12 @@
     src: sources.list.j2
     dest: /etc/apt/sources.list
   become: yes
+  when: is_apt_sources_list_bak_exist is failed
 
-- name: apt update
-  apt:
-    update_cache: yes
-  become: yes
+# - name: apt update
+#   apt:
+#     update_cache: yes
+#   become: yes
 
 - name: init components
   apt:
@@ -45,6 +46,16 @@
     state: present
     update_cache: false
   become: yes
+
+- name: judge is_oh_my_zsh_exist exist
+  shell: ls ~/.oh-my-zsh
+  ignore_errors: true
+  register: is_oh_my_zsh_exist
+
+- name: install oh_my_zsh
+  shell: 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)'
+  ignore_errors: true
+  when: is_oh_my_zsh_exist is failed 
 
 - name: add docker's official GPG key
   shell: "{{ item }}"
