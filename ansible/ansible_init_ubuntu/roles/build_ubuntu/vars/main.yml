@@ -10,6 +10,7 @@ init_apt_components:
   - tree
   - curl
   - zsh
+  - zip
   #  for nginx ./configure one(can't remember) module
   - libpcre3
   #  below 2 for nginx ./configure gzip module
